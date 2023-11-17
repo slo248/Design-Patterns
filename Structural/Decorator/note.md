@@ -1,4 +1,4 @@
-# Strategy Pattern
+# Decorator Pattern
 
 ## Problem
 Suppose that you are going to open a milk tea shop with a lot of intentions.
@@ -28,5 +28,22 @@ The wrapper inmplements the same interface as the wrapped object. That's why you
 
 You may wrap various decorators on object `MilkTea` that match customer's preferences. This resulting objects will be structured as a stack. The last decorator in the stack would be the object that the client actually works with. Since all decorators implement the same interface as the core `MilkTea`, the rest of the client code will not have to take care of whether it works with the "pure" `MilkTea` object or a stack of decorators.
 
-
 Example code: [C++](code.cpp)
+
+## Structure
+
+![Decorator structure](img/Decorator_Structure.png)
+
+## Pros and cons
+
+### Pros
+
+- Extend the object's behavior without adding new subclasses.
+- Add or remove behaviors at running time.
+- Combine behaviors as a sequence.
+
+### Cons
+
+- Hard to remove an inner wrapper out of the stack.
+- Hard to implement behavior of a decorator which does not depend on the stack.
+
