@@ -3,74 +3,100 @@ using namespace std;
 
 class MilkTeaComponent {
    public:
+    MilkTeaComponent(int cost) : mCost(cost) {}
     virtual ~MilkTeaComponent() {}
-    virtual int getCost() = 0;
+    virtual int getCost() { return mCost; }
+
+   private:
+    int mCost;
 };
 
 class MilkTea : public MilkTeaComponent {
    public:
+    MilkTea() : MilkTeaComponent(0) {}
     ~MilkTea() { cout << "Milk tea is removed!" << endl; };
-    int getCost() { return 30000; }
 };
 
 class MilkTeaDecorator : public MilkTeaComponent {
    public:
-    MilkTeaDecorator(MilkTeaComponent* wrappee) : mWrappee(wrappee) {}
+    MilkTeaDecorator(MilkTeaComponent* wrappee, int cost)
+        : mWrappee(wrappee), MilkTeaComponent(cost) {}
     ~MilkTeaDecorator() { delete mWrappee; }
-    virtual int getCost() = 0;
+    int getCost() { return mWrappee->getCost(); }
 
-   protected:
+   private:
     MilkTeaComponent* mWrappee;
 };
 
 class Default : public MilkTeaDecorator {
    public:
-    Default(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee) {
-        cout << "Default type is created!" << endl;
+    Default(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee, 30000) {
+        cout << "Default type is created!";
+        cout << " + " << MilkTeaComponent::getCost() << " VND" << endl;
     }
-    int getCost() { return mWrappee->getCost(); }
+    int getCost() {
+        // doing something else
+        return MilkTeaComponent::getCost() + MilkTeaDecorator::getCost();
+    }
 };
 
 class Bubble : public MilkTeaDecorator {
    public:
-    Bubble(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee) {}
+    Bubble(MilkTeaComponent* wrappee, int cost)
+        : MilkTeaDecorator(wrappee, cost) {}
     virtual int getCost() = 0;
 };
 
 class WhiteBubble : public Bubble {
    public:
-    WhiteBubble(MilkTeaComponent* wrappee) : Bubble(wrappee) {
-        cout << "White bubble is added!" << endl;
+    WhiteBubble(MilkTeaComponent* wrappee) : Bubble(wrappee, 7000) {
+        cout << "White bubble is added!";
+        cout << " + " << MilkTeaComponent::getCost() << " VND" << endl;
     }
     ~WhiteBubble() { cout << "White bubble is removed!" << endl; }
-    int getCost() { return 7000 + mWrappee->getCost(); }
+    int getCost() {
+        // doing something else
+        return MilkTeaComponent::getCost() + MilkTeaDecorator::getCost();
+    }
 };
 
 class BlackBubble : public Bubble {
    public:
-    BlackBubble(MilkTeaComponent* wrappee) : Bubble(wrappee) {
-        cout << "Black bubble is added!" << endl;
+    BlackBubble(MilkTeaComponent* wrappee) : Bubble(wrappee, 10000) {
+        cout << "Black bubble is added!";
+        cout << " + " << MilkTeaComponent::getCost() << " VND" << endl;
     }
     ~BlackBubble() { cout << "Black bubble is removed!" << endl; }
-    int getCost() { return 10000 + mWrappee->getCost(); }
+    int getCost() {
+        // doing something else
+        return MilkTeaComponent::getCost() + MilkTeaDecorator::getCost();
+    }
 };
 
 class EggPudding : public MilkTeaDecorator {
    public:
-    EggPudding(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee) {
-        cout << "Egg pudding is added!" << endl;
+    EggPudding(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee, 5000) {
+        cout << "Egg pudding is added!";
+        cout << " + " << MilkTeaComponent::getCost() << " VND" << endl;
     }
     ~EggPudding() { cout << "Egg pudding is removed!" << endl; }
-    int getCost() { return 5000 + mWrappee->getCost(); }
+    int getCost() {
+        // doing something else
+        return MilkTeaComponent::getCost() + MilkTeaDecorator::getCost();
+    }
 };
 
 class FruitPudding : public MilkTeaDecorator {
    public:
-    FruitPudding(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee) {
-        cout << "Fruit padding is added!" << endl;
+    FruitPudding(MilkTeaComponent* wrappee) : MilkTeaDecorator(wrappee, 6000) {
+        cout << "Fruit padding is added!";
+        cout << " + " << MilkTeaComponent::getCost() << " VND" << endl;
     }
     ~FruitPudding() { cout << "Fruit pudding is removed!" << endl; }
-    int getCost() { return 6000 + mWrappee->getCost(); }
+    int getCost() {
+        // doing something else
+        return MilkTeaComponent::getCost() + MilkTeaDecorator::getCost();
+    }
 };
 
 int main() {
