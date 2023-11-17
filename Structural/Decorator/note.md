@@ -29,4 +29,4 @@ The wrapper inmplements the same interface as the wrapped object. That's why you
 You may wrap various decorators on object `MilkTea` that match customer's preferences. This resulting objects will be structured as a stack. The last decorator in the stack would be the object that the client actually works with. Since all decorators implement the same interface as the core `MilkTea`, the rest of the client code will not have to take care of whether it works with the "pure" `MilkTea` object or a stack of decorators.
 
 
-Example code: [Click me](Structural/Decorator/code.cpp)
+Example code: [C++](code.cpp)
