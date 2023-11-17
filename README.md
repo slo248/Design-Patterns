@@ -4,6 +4,6 @@ This repo stores codes  and notes for various design patterns, which serves for 
 ## Creational  
 
 ## Structural
-- [Decorator](Structural/Decorator)
+- [Decorator](Structural/Decorator/note.md)
 
 ## Behavioral
